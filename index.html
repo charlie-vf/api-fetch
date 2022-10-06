@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content">
+
+    </div>
+    <script>
+        fetch("https://ci-swapi.herokuapp.com/api/")
+            .then(response => response.text())
+            // .then(data => {
+            //     document.getElementById("content").innerText = data;
+            // })
+            .then(data => displayData(data))
+            .catch((e) => {
+                console.error("Error: ", e)
+            })
+        
+            // this does the same as the commented out callback above
+            // do it this way as it separates retrieving and manipulating data
+        function displayData(data) {
+            document.getElementById("content").innerText = data;
+        }
+    </script>
+    <!-- 
+        we used the text() method on the response to render this as plain text, 
+        so that we could see it in the DOM
+    -->
+    <!--
+        why do we have two “then”s?
+    Well, that’s because fetch() returns a  promise - to fetch the data that we 
+    requested, and then calling the response.text() or response.json() method also 
+    returns a promise.  
+    So, in this case, we have two promises  being returned, so we need two “then”s.
+    -->
+    <!--
+        Need to add a .catch to catch any errors
+        error declared by (e)
+    -->
+</body>
+</html>
